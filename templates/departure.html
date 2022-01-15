@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block container %}
+{% set tours_count = tours|length %}
+{% if tours_count > 0 %}
+{% set min_nights = (tours.values()|min(attribute="nights")).nights %}
+{% set max_nights = (tours.values()|max(attribute="nights")).nights %}
+{% set min_price = (tours.values()|min(attribute="price")).price %}
+{% set max_price = (tours.values()|max(attribute="price")).price %}
+{% endif %}
+
+    <h1 class="display-5 mt-4">Летим и{{ departures[departure][1:] }}</h1>
+    <p class="mb-4">Найдено {{ tours_count }} тура, от {{ min_price}} до {{ max_price }} и от {{ min_nights }} ночей до
+        {{ max_nights }} ночей</p>
+    <!-- CARDS -->
+    {% include 'cards.html' %}
+{% endblock %}
